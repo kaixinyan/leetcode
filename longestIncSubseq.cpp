@@ -1,4 +1,4 @@
-int lengthOfLIS(vector<int>& nums) {
+nt lengthOfLIS(vector<int>& nums) {
         
         int n = nums.size();
         

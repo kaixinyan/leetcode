@@ -1,4 +1,4 @@
-tor<int> sum;
+vector<int> sum;
 
     NumArray(vector<int> &nums) {
         

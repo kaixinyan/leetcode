@@ -1,83 +1,43 @@
-//
-//  main.cpp
-//  addBinary
-//
-//  Created by Xingye Kan on 8/4/15.
-//  Copyright (c) 2015 Xingye Kan. All rights reserved.
-//
-
-#include <iostream>
-#include <string>
-using namespace std;
-
-
 string addBinary(string a, string b) {
-    
-    // find lengths of both strings in order to access their last digits
-    
-    int la = a.size();
-    int lb = b.size();
-    
-    if(la == 0) return b;
-    
-    if(lb == 0) return a;
-    
-    // get indices of their last digits
-    
-    int ia = la - 1;
-    int ib = lb - 1;
-    
-    // find the length after addition
-    
-    int l = max(la,lb) + 1;
-    
-    string aPlusb;
-    
-    // adding
-    
-    while(ia > 0 && ib > 0){
-    
-        if(a[ia] == 0 || b[ib] == 0) aPlusb[l-1] = a[ia] + b[ib];
-    
-        else{
-           aPlusb[l-1] = 0;
-           ++aPlusb[l];
-        }
-    
-        --l;
-        --ia;
-        --ib;
         
-    }
-    
-    
-    if (ia == 0 && ib == 0) {
-        return aPlusb;
-    }
-    
-    if (ia == 0) {
-        while (ib > 0) {
-            aPlusb[l] = b[ib];
-            --l;
-            --ib;
+        int la = a.size();
+        int lb = b.size();
+        
+        // make two strings have equal lengths by adding leading 0's
+        
+        if (la < lb) {
+            for (int i = 0; i < lb - la; ++i){
+                a = '0' + a;
+            }
         }
-    }
-    else{
-        while (ib > 0) {
-            aPlusb[l] = b[ib];
-            --l;
-            --ib;
+        
+        if (la > lb){
+            for (int i = 0; i < la - lb; ++i){
+                b = '0' + b;
+            }
         }
-    }
-    
-    
-    
-    return aPlusb;
-    
-}
-
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
-}
+        
+        int l = a.size();
+        
+        string ans;
+        
+        int carry = 0;
+        
+        for (int i = l - 1; i >= 0; --i){
+            
+            int aBit = a.at(i) - '0';
+            int bBit = b.at(i) - '0';
+ 
+          // boolean expression for sum of 3 bits
+            int sum = (aBit ^ bBit ^ carry) + '0';
+ 
+            ans = (char)sum + ans;
+ 
+        // boolean expression for 3-bit addition
+           carry = (aBit & bBit) | (aBit & carry) | (bBit & carry);
+        }
+        
+        // concatenation: '1' + '0' = '10', '0' + '1' = '01'
+        if (carry == 1) ans = '1' + ans;
+        
+        return ans;

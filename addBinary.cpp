@@ -25,12 +25,14 @@ string addBinary(string a, string b) {
         
         for (int i = l - 1; i >= 0; --i){
             
+          // define corresponding integer according to ascII value of ith string element
             int aBit = a.at(i) - '0';
             int bBit = b.at(i) - '0';
  
           // boolean expression for sum of 3 bits
             int sum = (aBit ^ bBit ^ carry) + '0';
- 
+    
+          
             ans = (char)sum + ans;
  
         // boolean expression for 3-bit addition

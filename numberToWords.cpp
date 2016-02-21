@@ -29,7 +29,7 @@
             return "Zero";
         } else {
             string ret = int2string(num);
-            return ret.substr(1, ret.length() - 1);
+            return ret.substr(1, ret.length() - 1); // substring starting from ith element with length ret.length() - 1, i.e. till the end
         }
     
     }
